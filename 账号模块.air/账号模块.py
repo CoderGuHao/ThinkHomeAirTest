@@ -33,6 +33,7 @@ assert_exists(Template(r"tpl1533883870891.png", record_pos=(0.001, 0.528), resol
 poco("com.thinkhome.v3:id/image_layout").click()
 poco(text="选择本地图片").click()
 poco(text="最近").click()
+poco("com.android.documentsui:id/grid").child("android.widget.FrameLayout")[0].child("android.widget.LinearLayout").child("com.android.documentsui:id/icon_mime").click()
 poco("com.android.documentsui:id/icon_mime").click()
 poco("com.android.gallery3d:id/head_select_right").click()
 assert_exists(Template(r"tpl1533883908278.png", record_pos=(0.002, 0.532), resolution=(1080, 1920)), "本地图片修改头像成功")

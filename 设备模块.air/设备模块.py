@@ -291,7 +291,9 @@ except:
     print("error")
 else:
     print("ok")
-
+finally:
+    poco("com.thinkhome.v3:id/toolbar_btn_back").click()
+    
 
 
     

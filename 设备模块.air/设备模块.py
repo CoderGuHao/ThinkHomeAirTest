@@ -24,7 +24,7 @@ poco(text="灯光").click()
 num1 = random.randint(0,1)
 poco("com.thinkhome.v3:id/scroll").child("android.widget.RelativeLayout")[num1].child("com.thinkhome.v3:id/img_icon").long_click()
 poco(text="修改图标").click()
-num2 = random.randint(0,1)
+num2 = random.randint(0,7)
 poco("com.thinkhome.v3:id/listView").child("android.widget.RelativeLayout")[num2].child("com.thinkhome.v3:id/img_icon_custom").click()
 poco("com.thinkhome.v3:id/toolbar_right_text").click()
 poco("com.thinkhome.v3:id/scroll").child("android.widget.RelativeLayout")[num1].child("com.thinkhome.v3:id/img_icon").long_click()
@@ -166,7 +166,7 @@ poco("com.thinkhome.v3:id/list_view").child("android.widget.RelativeLayout")[num
 message1 = poco("com.thinkhome.v3:id/list_view").child("android.widget.RelativeLayout")[num3].child("com.thinkhome.v3:id/checked_text_view").get_text()
 poco("com.thinkhome.v3:id/toolbar_right_text").click()
 poco("com.thinkhome.v3:id/toolbar_btn_back").click()
-message2 = poco("com.thinkhome.v3:id/scroll").child("android.widget.RelativeLayout")[num1].child("com.thinkhome.v3:id/tv_room").get_text()
+message2 = poco("com.thinkhome.v3:id/scroll").child("android.widget.RelativeLayout")[num1].child("com.thinkhome.v3:id/name_layout").child("com.thinkhome.v3:id/tv_room").get_text()
 try:
     assert_equal(message1,message2,"设置房间")
 except:
@@ -258,7 +258,9 @@ num4 = random.randint(0,6)
 poco("com.thinkhome.v3:id/list_view").child("android.widget.RelativeLayout")[num4].click()
 message = poco("com.thinkhome.v3:id/list_view").child("android.widget.RelativeLayout")[num4].child("com.thinkhome.v3:id/checked_text_view").get_text()
 poco("com.thinkhome.v3:id/toolbar_right_text").click()
-message1 = poco("com.thinkhome.v3:id/setting_countdown").child("com.thinkhome.v3:id/value").get_text()
+message1 = poco("com.thinkhome.v3:id/setting_countdown").child("android.widget.RelativeLayout").child("com.thinkhome.v3:id/value").get_text()
+
+print(message1)
 try:
     assert_equal(message,message1,"设置倒计时")
 except:
@@ -277,17 +279,19 @@ poco("android:id/button1").click()
 poco("com.thinkhome.v3:id/scroll").child("android.widget.RelativeLayout")[num1].child("com.thinkhome.v3:id/img_icon").long_click()
 poco(text="更多设置").click()
 poco(text="最长开启").click()
-poco("com.thinkhome.v3:id/list_view").child("android.widget.RelativeLayout")[num3].click()
-num3 = random.randint(0,7)
-poco("com.thinkhome.v3:id/list_view").child("android.widget.RelativeLayout")[num3].click()
-message = poco("com.thinkhome.v3:id/list_view").child("android.widget.RelativeLayout")[num3].child("com.thinkhome.v3:id/checked_text_view").get_text()
+poco("com.thinkhome.v3:id/list_view").child("android.widget.RelativeLayout")[num2].click()
+num2 = random.randint(0,7)
+poco("com.thinkhome.v3:id/list_view").child("android.widget.RelativeLayout")[num2].click()
+message = poco("com.thinkhome.v3:id/list_view").child("android.widget.RelativeLayout")[num2].child("com.thinkhome.v3:id/checked_text_view").get_text()
 poco("com.thinkhome.v3:id/toolbar_right_text").click()
-message1 = poco("com.thinkhome.v3:id/setting_max_on_time").child("com.thinkhome.v3:id/value").get_text()
+message1 = poco("com.thinkhome.v3:id/setting_max_on_time").child("android.widget.RelativeLayout").child("com.thinkhome.v3:id/value").get_text()
 try:
     assert_equal(message,message1,"设置最长开启时间")
 except:
     print("error")
 else:
     print("ok")
-finally:
-    poco("com.thinkhome.v3:id/toolbar_btn_back").click()
+
+
+
+    

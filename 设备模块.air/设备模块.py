@@ -275,25 +275,63 @@ poco("com.thinkhome.v3:id/scroll").child("android.widget.RelativeLayout")[num1].
 poco("com.thinkhome.v3:id/item_id")[1].click()
 poco("android:id/button1").click()
 
-#设置最长开启时间
+# #设置最长开启时间
+# poco("com.thinkhome.v3:id/scroll").child("android.widget.RelativeLayout")[num1].child("com.thinkhome.v3:id/img_icon").long_click()
+# poco(text="更多设置").click()
+# poco(text="最长开启").click()
+# poco("com.thinkhome.v3:id/list_view").child("android.widget.RelativeLayout")[num2].click()
+# num2 = random.randint(0,7)
+# poco("com.thinkhome.v3:id/list_view").child("android.widget.RelativeLayout")[num2].click()
+# message = poco("com.thinkhome.v3:id/list_view").child("android.widget.RelativeLayout")[num2].child("com.thinkhome.v3:id/checked_text_view").get_text()
+# poco("com.thinkhome.v3:id/toolbar_right_text").click()
+# message1 = poco("com.thinkhome.v3:id/setting_max_on_time").child("android.widget.RelativeLayout").child("com.thinkhome.v3:id/value").get_text()
+# try:
+#     assert_equal(message,message1,"设置最长开启时间")
+# except:
+#     print("error")
+# else:
+#     print("ok")
+# finally:
+#     poco("com.thinkhome.v3:id/toolbar_btn_back").click()
+    
+# #超时提醒
+# poco("com.thinkhome.v3:id/toolbar_btn_back").click()
+# poco(text="电源").click()
+# poco("com.thinkhome.v3:id/scroll").child("android.widget.RelativeLayout")[num1].child("com.thinkhome.v3:id/img_icon").long_click()
+# poco(text="更多设置").click()
+# poco(text="超时提醒").click()
+# poco("com.thinkhome.v3:id/list_view").child("android.widget.RelativeLayout")[num2].click()
+# num2 = random.randint(0,7)
+# poco("com.thinkhome.v3:id/list_view").child("android.widget.RelativeLayout")[num2].click()
+# message = poco("com.thinkhome.v3:id/list_view").child("android.widget.RelativeLayout")[num2].child("com.thinkhome.v3:id/checked_text_view").get_text()
+# poco("com.thinkhome.v3:id/toolbar_right_text").click()
+# message1 = poco("com.thinkhome.v3:id/setting_overtime").child("android.widget.RelativeLayout").child("com.thinkhome.v3:id/value").get_text()
+# try:
+#     assert_equal(message,message1,"设置最长开启时间")
+# except:
+#     print("error")
+# else:
+#     print("ok")
+
+#设置过载电流
+poco("com.thinkhome.v3:id/toolbar_btn_back").click()
+poco(text="电源").click()
 poco("com.thinkhome.v3:id/scroll").child("android.widget.RelativeLayout")[num1].child("com.thinkhome.v3:id/img_icon").long_click()
 poco(text="更多设置").click()
-poco(text="最长开启").click()
+poco(text="过载电流").click()
 poco("com.thinkhome.v3:id/list_view").child("android.widget.RelativeLayout")[num2].click()
 num2 = random.randint(0,7)
 poco("com.thinkhome.v3:id/list_view").child("android.widget.RelativeLayout")[num2].click()
 message = poco("com.thinkhome.v3:id/list_view").child("android.widget.RelativeLayout")[num2].child("com.thinkhome.v3:id/checked_text_view").get_text()
 poco("com.thinkhome.v3:id/toolbar_right_text").click()
-message1 = poco("com.thinkhome.v3:id/setting_max_on_time").child("android.widget.RelativeLayout").child("com.thinkhome.v3:id/value").get_text()
+message1 = poco("com.thinkhome.v3:id/setting_over_current").child("android.widget.RelativeLayout").child("com.thinkhome.v3:id/value").get_text()
 try:
-    assert_equal(message,message1,"设置最长开启时间")
+    assert_equal(message,message1,"设置过载电流")
 except:
     print("error")
 else:
     print("ok")
-finally:
-    poco("com.thinkhome.v3:id/toolbar_btn_back").click()
     
-
+#设置过压欠压：开启关闭电源
 
     

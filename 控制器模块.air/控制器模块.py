@@ -263,7 +263,7 @@ for i in range(1,10):
         break
     else:
         poco("com.thinkhome.v3:id/expand_listview").swipe([-0.02, -0.40])
-        sleep(2)
+        sleep(1)
 
 
 poco(text="反馈数据选项").click()

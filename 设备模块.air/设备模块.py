@@ -364,16 +364,108 @@ poco("com.thinkhome.v3:id/item_bottom").click()
 poco("android:id/numberpicker_input").swipe([0.0, -0.1040])
 poco("android:id/button1").click()
 message = message + ", " + poco("com.thinkhome.v3:id/item_bottom").child("android.widget.RelativeLayout").child("android.widget.RelativeLayout").child("com.thinkhome.v3:id/value").get_text()
-print(message)
 poco("com.thinkhome.v3:id/toolbar_right_text").click()
 message1 = poco("com.thinkhome.v3:id/setting_home_page_showing").child("android.widget.RelativeLayout").child("com.thinkhome.v3:id/value").get_text()
-print(message1)
 try:
     assert_equal(message,message1,"按钮显示：修改按钮上下方显示内容")
 except:
     print("error")
 else:
     print("ok")
+
+#清除数据
+poco(text="清除数据").click()
+poco("android:id/button1").click()
+message = poco("android:id/message").get_text()
+try:
+    assert_equal(message,"数据清零已成功","清除数据")
+except:
+    print("error")
+else:
+    print("ok")
+finally:
+    poco("android:id/button3").click()
+
+#分享：云子分享
+poco("com.thinkhome.v3:id/scrollView").swipe([0.01, -0.73])
+poco(text="分享").click()
+poco(text="Beacon").click()
+poco("com.thinkhome.v3:id/tv_device").click()
+poco("com.thinkhome.v3:id/toolbar_right_text").click()
+poco(text="Beacon").click()
+poco("com.thinkhome.v3:id/tv_device").click()
+poco("com.thinkhome.v3:id/toolbar_right_text").click()
+
+#设备密码：启用
+poco(text="设备密码").click()
+poco("com.thinkhome.v3:id/et_password").set_text("1234")
+poco(text="开启").click()
+poco(checked="不开启").click()
+poco(text="开启").click()
+poco("com.thinkhome.v3:id/toolbar_right_text").click()
+message = poco("com.thinkhome.v3:id/setting_password").child("android.widget.RelativeLayout").child("com.thinkhome.v3:id/value").get_text()
+try:
+    assert_equal(message,"开启","设备密码：启用")
+except:
+    print("error")
+else:
+    print("ok")
+    
+#设备密码：不启用
+poco(text="设备密码").click()
+poco("com.thinkhome.v3:id/et_password").set_text("1234")
+poco(text="不开启").click()
+poco("com.thinkhome.v3:id/toolbar_right_text").click()
+message = poco("com.thinkhome.v3:id/setting_password").child("android.widget.RelativeLayout").child("com.thinkhome.v3:id/value").get_text()
+try:
+    assert_equal(message,"未启用","设备密码：不启用")
+except:
+    print("error")
+else:
+    print("ok")
+
+#所属控制器：查看
+poco(text="所属控制器").click()
+poco("com.thinkhome.v3:id/toolbar_btn_back").click()
+
+#设备隐藏：隐藏
+poco(text="设备隐藏").click()
+poco(text="在“全部”列表中隐藏").click()
+poco(text="在“全部”列表中隐藏").click()
+poco("com.thinkhome.v3:id/toolbar_right_text").click()
+poco(text="设备隐藏").click()
+poco(text="在“全部”列表中隐藏").click()
+poco("com.thinkhome.v3:id/toolbar_right_text").click()
+
+#日志：查看、删除
+poco(text="日志").click()
+try:
+    if poco("com.thinkhome.v3:id/tv_content").exists:
+        poco("com.thinkhome.v3:id/tv_content").long_click();
+        poco(text="删除").click()
+except:
+    poco("com.thinkhome.v3:id/toolbar_btn_back").click()
+
+#参数调整
+poco("com.thinkhome.v3:id/toolbar_btn_back").click()
+poco("com.thinkhome.v3:id/toolbar_btn_back").click()
+poco(text="环境").click()
+for i in range(1,10):
+    if  poco(text="K温度").exists():
+        poco(text="K温度").long_click()
+        poco(text="更多设置").click()
+        poco(text="参数调整").click()
+        break
+    else:
+        poco("android.support.v4.widget.SlidingPaneLayout").swipe([0.00, -0.31])
+        sleep(1)
+
+
+
+    
+
+
+
 
 
 

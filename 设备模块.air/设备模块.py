@@ -446,7 +446,7 @@ try:
 except:
     poco("com.thinkhome.v3:id/toolbar_btn_back").click()
 
-#参数调整
+#参数调整:恢复默认
 poco("com.thinkhome.v3:id/toolbar_btn_back").click()
 poco("com.thinkhome.v3:id/toolbar_btn_back").click()
 poco(text="环境").click()
@@ -459,11 +459,64 @@ for i in range(1,10):
     else:
         poco("android.support.v4.widget.SlidingPaneLayout").swipe([0.00, -0.31])
         sleep(1)
+poco("com.thinkhome.v3:id/btn_restore").click()
+poco("android:id/button1").click()
+poco("com.thinkhome.v3:id/toolbar_right_text").click()
 
+#数值校准
+poco(text="数值校准").click()
+poco("com.thinkhome.v3:id/btn_increase").click()
+poco("com.thinkhome.v3:id/toolbar_right_text").click()
+poco(text="数值校准").click()
+poco("com.thinkhome.v3:id/btn_decrease").click()
+poco("com.thinkhome.v3:id/toolbar_right_text").click()
+poco("com.thinkhome.v3:id/toolbar_btn_back").click()
+poco("com.thinkhome.v3:id/toolbar_btn_back").click()
 
-
+#自定义按键名称:为空
+poco(text="遥控器").click()
+for i in range(1,10):
+    if  poco(text="红外九键遥控").exists():
+        poco(text="红外九键遥控").click()
+        break
+    else:
+        poco("android.support.v4.widget.SlidingPaneLayout").swipe([0.00, -0.31])
+        sleep(1)
+poco("com.thinkhome.v3:id/btn_2").long_click()
+poco("com.thinkhome.v3:id/et_name").set_text("")
+message = poco("android:id/message").get_text()
+try:
+    assert_equal(message,"名称不能为空","自定义按键名称:为空")
+except:
+    print("error")
+else:
+    print("ok")
+finally:
+    poco("android:id/button3").click()
     
-
+# #自定义按键名称：超过4位 （4.6.14修改可开放）
+# poco("com.thinkhome.v3:id/btn_2").long_click()
+# poco("com.thinkhome.v3:id/et_name").set_text("12345")
+# message = poco("android:id/message").get_text()
+# try:
+#     assert_equal(message,"名称长度不能超过四位","自定义按键名称：超过4位")
+# except:
+#     print("error")
+# else:
+#     print("ok")
+# finally:
+#     poco("android:id/button3").click()
+    
+#自定义按键名称：正确修改
+poco("com.thinkhome.v3:id/btn_2").long_click()
+poco("com.thinkhome.v3:id/et_name").set_text("1")
+message = poco("com.thinkhome.v3:id/btn_2").get_text()
+try:
+    assert_equal(message,"1","自定义按键名称：正确修改")
+except:
+    print("error")
+else:
+    print("ok")
 
 
 

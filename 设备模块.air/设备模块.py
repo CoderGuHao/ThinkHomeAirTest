@@ -332,6 +332,51 @@ except:
 else:
     print("ok")
     
-#设置过压欠压：开启关闭电源
+#设置过压欠压：关闭该路电源停启用
+poco(text="过压/欠压").click()
+poco("com.thinkhome.v3:id/switch_view").click()
+poco("com.thinkhome.v3:id/toolbar_right_text").click()
+poco(text="过压/欠压").click()
+poco("com.thinkhome.v3:id/switch_view").click()
+poco("com.thinkhome.v3:id/toolbar_right_text").click()
+
+#设置过压欠压：恢复默认
+poco(text="过压/欠压").click()
+poco("com.thinkhome.v3:id/btn_restore").click()
+poco("android:id/button1").click()
+poco("com.thinkhome.v3:id/toolbar_right_text").click()
+
+#按钮显示：停启用
+poco(text="按钮显示").click()
+poco("com.thinkhome.v3:id/switch_view").click()
+poco("com.thinkhome.v3:id/toolbar_right_text").click()
+poco(text="按钮显示").click()
+poco("com.thinkhome.v3:id/switch_view").click()
+poco("com.thinkhome.v3:id/toolbar_right_text").click()
+
+#按钮显示：修改按钮上下方显示内容
+poco(text="按钮显示").click()
+poco("com.thinkhome.v3:id/item_top").click()
+poco("android:id/numberpicker_input").swipe([-0.0070, 0.1060])
+poco("android:id/button1").click()
+message = poco("com.thinkhome.v3:id/item_top").child("android.widget.RelativeLayout").child("android.widget.RelativeLayout").child("com.thinkhome.v3:id/value").get_text()
+poco("com.thinkhome.v3:id/item_bottom").click()
+poco("android:id/numberpicker_input").swipe([0.0, -0.1040])
+poco("android:id/button1").click()
+message = message + ", " + poco("com.thinkhome.v3:id/item_bottom").child("android.widget.RelativeLayout").child("android.widget.RelativeLayout").child("com.thinkhome.v3:id/value").get_text()
+print(message)
+poco("com.thinkhome.v3:id/toolbar_right_text").click()
+message1 = poco("com.thinkhome.v3:id/setting_home_page_showing").child("android.widget.RelativeLayout").child("com.thinkhome.v3:id/value").get_text()
+print(message1)
+try:
+    assert_equal(message,message1,"按钮显示：修改按钮上下方显示内容")
+except:
+    print("error")
+else:
+    print("ok")
+
+
+
+
 
     

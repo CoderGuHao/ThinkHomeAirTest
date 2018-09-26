@@ -1,7 +1,7 @@
 # -*- encoding=utf8 -*-
 __author__ = "guhao"
 
-#执行该脚本前确保app权限均打开，关闭系统密码、欢迎页、动态背景下载、成员管理邀请等干扰
+#执行该脚本前确保app权限均打开，关闭系统密码、欢迎页、动态背景下载、成员管理邀请等干扰,退出所有账号
 
 import random
 from airtest.core.api import *
@@ -13,10 +13,10 @@ auto_setup(__file__)
 start_app("com.thinkhome.v3")
 sleep(5)
 
-# poco("com.thinkhome.v3:id/et_account").set_text("18158288412")
-# poco("com.thinkhome.v3:id/et_password").set_text("0123456")
-# poco("com.thinkhome.v3:id/btn_login").click()
-# sleep(5)
+poco("com.thinkhome.v3:id/et_account").set_text("18158288412")
+poco("com.thinkhome.v3:id/et_password").set_text("0123456")
+poco("com.thinkhome.v3:id/btn_login").click()
+sleep(5)
 
 #修改类型
 poco(text="类别").click()
@@ -517,11 +517,107 @@ except:
     print("error")
 else:
     print("ok")
+finally:
+    poco("com.thinkhome.v3:id/btn_back").click()
+    poco("com.thinkhome.v3:id/btn_back").click()
 
+#删除设备：删除成功
+poco("android:id/tabs").child("android.widget.RelativeLayout")[3].child("com.thinkhome.v3:id/tab_image").click()
+poco(text="设备管理").click()
+poco(text="ThinkID:77670215").click()
+poco("com.thinkhome.v3:id/tv_device").long_click()
+poco(text="删除").click()
+poco("android:id/button1").click()
+message = poco("com.thinkhome.v3:id/tv_no_device").get_text()
+try:
+    assert_equal(message,"尚无设备","删除设备：删除成功")
+except:
+    print("error")
+else:
+    print("ok")
+finally:
+    poco("com.thinkhome.v3:id/toolbar_btn_back").click()
 
-
-
-
-
-
+#删除设备：设备有关联属性
+poco(text="ThinkID:37054164").click()
+poco("com.thinkhome.v3:id/tv_device").long_click()
+poco(text="删除").click()
+poco("android:id/button1").click()
+message = poco("android:id/message").get_text()
+try:
+    assert_equal(message,"部分设备有联动，无法停用这些设备","删除设备：设备有关联属性")
+except:
+    print("error")
+else:
+    print("ok")
+finally:
+    poco("android:id/button3").click()
+    poco("com.thinkhome.v3:id/toolbar_btn_back").click()
+    poco("com.thinkhome.v3:id/toolbar_btn_back").click()
     
+#排序：从上往下
+poco("android:id/tabs").child("android.widget.RelativeLayout")[0].child("com.thinkhome.v3:id/tab_image").click()
+poco("com.thinkhome.v3:id/img_setting").click()
+poco(text="自定义排序").click()
+message = poco("com.thinkhome.v3:id/scroll").child("android.widget.RelativeLayout")[0].child("com.thinkhome.v3:id/name_layout").child("com.thinkhome.v3:id/tv_device").get_text()
+poco("com.thinkhome.v3:id/scroll").child("android.widget.RelativeLayout")[0].child("com.thinkhome.v3:id/list_row_draganddrop_touchview").swipe([0.00, 0.14])
+poco("com.thinkhome.v3:id/toolbar_right_text").click()
+message1 = poco("com.thinkhome.v3:id/scroll").child("android.widget.RelativeLayout")[1].child("com.thinkhome.v3:id/name_layout").child("com.thinkhome.v3:id/tv_device").get_text()
+try:
+    assert_equal(message,message1,"排序：从上往下")
+except:
+    print("error")
+else:
+    print("ok")
+    
+#排序：从下往上
+poco("com.thinkhome.v3:id/img_setting").click()
+poco(text="自定义排序").click()
+message = poco("com.thinkhome.v3:id/scroll").child("android.widget.RelativeLayout")[1].child("com.thinkhome.v3:id/name_layout").child("com.thinkhome.v3:id/tv_device").get_text()
+poco("com.thinkhome.v3:id/scroll").child("android.widget.RelativeLayout")[1].child("com.thinkhome.v3:id/list_row_draganddrop_touchview").swipe([0.01, -0.14])
+poco("com.thinkhome.v3:id/toolbar_right_text").click()
+message1 = poco("com.thinkhome.v3:id/scroll").child("android.widget.RelativeLayout")[0].child("com.thinkhome.v3:id/name_layout").child("com.thinkhome.v3:id/tv_device").get_text()
+try:
+    assert_equal(message,message1,"排序：从下往上")
+except:
+    print("error")
+else:
+    print("ok")
+    
+#排序：恢复默认
+poco("com.thinkhome.v3:id/img_setting").click()
+poco(text="恢复默认排序").click()
+poco("android:id/button1").click()
+
+#名称组合：名称以区域优先
+poco("com.thinkhome.v3:id/img_setting").click()
+poco(text="名称组合").click()
+poco(text="名称以区域优先").click()
+
+#名称组合：只显示设备号
+poco("com.thinkhome.v3:id/img_setting").click()
+poco(text="名称组合").click()
+poco(text="只显示设备号").click()
+
+#名称组合：名称与设备区域平行
+poco("com.thinkhome.v3:id/img_setting").click()
+poco(text="名称组合").click()
+poco(text="名称与设备区域平行").click()
+
+#名称组合：名称以设备优先
+poco("com.thinkhome.v3:id/img_setting").click()
+poco(text="名称组合").click()
+poco(text="名称以设备优先").click()
+
+#下拉全关
+poco("com.thinkhome.v3:id/list_background").swipe([0.00, 0.28])
+poco("com.thinkhome.v3:id/toolbar_btn_setting").click()
+poco("com.thinkhome.v3:id/list_background").swipe([0.00, 0.28])
+sleep(1)
+message = poco("com.thinkhome.v3:id/toolbar_header").child("android.widget.RelativeLayout").child("com.thinkhome.v3:id/toolbar_tv_name").get_text()
+try:
+    assert_equal(message,"未关(0)","下拉全关")
+except:
+    print("error")
+else:
+    print("ok")

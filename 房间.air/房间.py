@@ -409,7 +409,6 @@ finally:
 # finally:
 #     poco("android:id/button3").click()
     
-
 #保存二维码图片
 poco("com.thinkhome.v3:id/list_view_share_list_ms").click()
 poco("com.thinkhome.v3:id/save_qr_code_image").click()

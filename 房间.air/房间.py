@@ -352,7 +352,7 @@ poco("com.thinkhome.v3:id/share_name_edt").set_text("w测试分享2")
 poco("com.thinkhome.v3:id/qr_code_is_generated").click()
 try:
     message=poco("android:id/message").get_text()
-    assert_equal(message, "当前选择时间已有分享，请重新设置时间!", "当前时间已有分享")
+    assert_equal(message, "当前选择时间已有分享，请重新设置时间！", "当前时间已有分享")
 except:
     print("Error")
 else:

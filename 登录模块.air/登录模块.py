@@ -11,6 +11,7 @@ start_app("com.thinkhome.v3")
 sleep(5)
 
 #注册:号码为空
+poco("com.thinkhome.v3:id/tv_welcome").click()
 poco("com.thinkhome.v3:id/tv_register").click()
 poco("com.thinkhome.v3:id/register_password").set_text("123456")
 poco("com.thinkhome.v3:id/register_verify").set_text("123456")
@@ -63,7 +64,7 @@ poco("com.thinkhome.v3:id/register_verify").set_text("123456")
 poco("com.thinkhome.v3:id/register_btn").click()
 message = poco("android:id/message").get_text()
 try:
-    assert_equal(message,"手机号码格式不匹配","注册:手机号码格式不匹配")
+    assert_equal(message,"手机格式不正确","注册:手机格式不正确")
 except:
     print("error")
 else:
@@ -206,7 +207,7 @@ poco("com.thinkhome.v3:id/et_find_password").set_text("1")
 poco("com.thinkhome.v3:id/btn_get_password").click()
 message = poco("android:id/message").get_text()
 try:
-    assert_equal(message,"手机号码格式不匹配","忘记密码:账号格式错误")
+    assert_equal(message,"手机格式不正确","忘记密码:手机格式不正确")
 except:
     print("error")
 else:
@@ -228,6 +229,7 @@ finally:
     poco("android:id/button3").click()
     
 #忘记密码:验证码为空
+poco("com.thinkhome.v3:id/tv_welcome").click()
 poco("com.thinkhome.v3:id/tv_forgot_password").click()
 poco("com.thinkhome.v3:id/et_find_password").set_text("18368493627")
 poco("com.thinkhome.v3:id/btn_get_password").click()
@@ -355,7 +357,7 @@ poco("com.thinkhome.v3:id/et_password").set_text("123456")
 poco("com.thinkhome.v3:id/btn_login").click()
 message = poco("android:id/message").get_text()
 try:
-    assert_equal(message,"手机号码格式不匹配","登录:账号格式不正确")
+    assert_equal(message,"手机格式不正确","登录:手机格式不正确")
 except:
     print("error")
 else:
@@ -392,14 +394,15 @@ finally:
     poco("android:id/button3").click()
 
 #登录:成功登录
-poco("com.thinkhome.v3:id/et_account").set_text("18368493627")
-poco("com.thinkhome.v3:id/et_password").set_text("123456")
+poco("com.thinkhome.v3:id/et_account").set_text("18158288412")
+poco("com.thinkhome.v3:id/et_password").set_text("0123456")
 poco("com.thinkhome.v3:id/btn_login").click()
-poco(text="10").click()
+message1 = poco("com.thinkhome.v3:id/house_list").child("android.widget.RelativeLayout")[0].child("com.thinkhome.v3:id/name").get_text()
+poco("com.thinkhome.v3:id/house_list").child("android.widget.RelativeLayout")[0].click()
 sleep(2)
-message = poco("com.thinkhome.v3:id/tv_currenthouse").get_text()
+message2 = poco("com.thinkhome.v3:id/tv_currenthouse").get_text()
 try:
-    assert_equal(message,"10","登录:成功登录")
+    assert_equal(message1,message2,"登录:成功登录")
 except:
     print("error")
 else:

@@ -11,7 +11,7 @@ poco = AndroidUiautomationPoco()
 start_app("com.thinkhome.v3")
 sleep(5.0)
 
-# #登录181***
+#登录181***
 poco("android:id/tabs").child("android.widget.RelativeLayout")[1].click()
 
 #添加房间

@@ -397,7 +397,8 @@ finally:
 poco("com.thinkhome.v3:id/et_account").set_text("18158288412")
 poco("com.thinkhome.v3:id/et_password").set_text("0123456")
 poco("com.thinkhome.v3:id/btn_login").click()
-message1 = poco("com.thinkhome.v3:id/house_list").child("android.widget.RelativeLayout")[0].child("com.thinkhome.v3:id/name").get_text()
+sleep(5)
+message1 = poco("com.thinkhome.v3:id/house_list").child("android.widget.RelativeLayout")[0].child("android.widget.LinearLayout").child("com.thinkhome.v3:id/name").get_text()
 poco("com.thinkhome.v3:id/house_list").child("android.widget.RelativeLayout")[0].click()
 sleep(2)
 message2 = poco("com.thinkhome.v3:id/tv_currenthouse").get_text()
@@ -413,7 +414,8 @@ poco(text="设置").click()
 poco(text="账号管理").click()
 poco("com.thinkhome.v3:id/logout").click()
 poco("android:id/button1").click()
-if poco("com.thinkhome.v3:id/btn_login").exists:
+print(message)
+if poco("com.thinkhome.v3:id/tv_welcome").exists:
     message = "已退出登录"
 try:
     assert_equal(message,"已退出登录","登录:退出登录")

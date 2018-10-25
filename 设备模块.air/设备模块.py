@@ -10,13 +10,13 @@ poco = AndroidUiautomationPoco()
 
 auto_setup(__file__)
 
-start_app("com.thinkhome.v3")
-sleep(5)
-
-poco("com.thinkhome.v3:id/et_account").set_text("18158288412")
-poco("com.thinkhome.v3:id/et_password").set_text("0123456")
-poco("com.thinkhome.v3:id/btn_login").click()
-sleep(5)
+# start_app("com.thinkhome.v3")
+# sleep(5)
+# 
+# poco("com.thinkhome.v3:id/et_account").set_text("18158288412")
+# poco("com.thinkhome.v3:id/et_password").set_text("0123456")
+# poco("com.thinkhome.v3:id/btn_login").click()
+# sleep(5)
 
 #修改类型
 poco(text="类别").click()

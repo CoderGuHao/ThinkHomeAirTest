@@ -9,9 +9,9 @@ poco = AndroidUiautomationPoco()
 
 auto_setup(__file__)
 
-start_app("com.thinkhome.v3")
-sleep(5)
-
+# start_app("com.thinkhome.v3")
+# sleep(5)
+# 
 #登录183684893627
 poco("com.thinkhome.v3:id/tv_welcome").click()
 poco("com.thinkhome.v3:id/et_account").set_text("18368493627")
@@ -309,3 +309,4 @@ else:
 poco("com.thinkhome.v3:id/logout").click()
 poco("android:id/button1").click()
 poco(text="18158288412").click()
+poco("com.thinkhome.v3:id/house_list").child("android.widget.RelativeLayout")[0].click()

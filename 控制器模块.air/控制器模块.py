@@ -2,20 +2,20 @@
 __author__ = "guhao"
 
 #执行该脚本前确保app权限均打开，关闭系统密码、欢迎页、动态背景下载、成员管理邀请等干扰,退出所有账号
-
+import random
 from airtest.core.api import *
 from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 poco = AndroidUiautomationPoco()
 
 auto_setup(__file__)
 
-start_app("com.thinkhome.v3")
-sleep(5)
+# start_app("com.thinkhome.v3")
+# sleep(5)
 
-poco("com.thinkhome.v3:id/et_account").set_text("18158288412")
-poco("com.thinkhome.v3:id/et_password").set_text("0123456")
-poco("com.thinkhome.v3:id/btn_login").click()
-sleep(5)
+# poco("com.thinkhome.v3:id/et_account").set_text("18158288412")
+# poco("com.thinkhome.v3:id/et_password").set_text("0123456")
+# poco("com.thinkhome.v3:id/btn_login").click()
+# sleep(5)
 
 #手动输入：为空
 poco(text="设置").click()
@@ -207,13 +207,14 @@ finally:
 #     poco("android:id/button3").click()
 
 # 修改名称：正确输入
-poco("com.thinkhome.v3:id/tv_name").set_text("测试")
+n = str(random.randint(1,10))
+poco("com.thinkhome.v3:id/tv_name").set_text("测试"+n)
 poco("com.thinkhome.v3:id/toolbar_right_text").click()
 poco(text="ThinkID:77670215").long_click()
 poco(text="更多设置").click()
 message = poco("com.thinkhome.v3:id/tv_name").get_text()
 try:
-    assert_equal(message,"name","修改名称：正确输入")
+    assert_equal(message,"测试"+n,"修改名称：正确输入")
 except:
     print("Error")
 else:
@@ -231,7 +232,7 @@ poco("com.thinkhome.v3:id/toolbar_right_text").click()
 # 位置：从相册选择
 poco(text="位置").click()
 poco("com.thinkhome.v3:id/iv").click()
-poco(text="选择本地图片").click()
+poco(text="从相册选择").click()
 poco(text="最近").click()
 poco("com.android.documentsui:id/icon_mime").click()
 poco("com.android.gallery3d:id/head_select_right").click()
@@ -245,7 +246,7 @@ poco("com.thinkhome.v3:id/toolbar_right_text").click()
 
 # 位置：添加描述
 poco(text="位置").click()
-poco("com.thinkhome.v3:id/feedback").set_text("测试")
+poco("com.thinkhome.v3:id/feedback").set_text("测试"+n)
 poco("com.thinkhome.v3:id/toolbar_right_text").click()
 
 # 功能停启用：停用
@@ -260,10 +261,10 @@ poco("com.thinkhome.v3:id/toolbar_right_text").click()
 poco("com.thinkhome.v3:id/toolbar_btn_back").click()
 
 # 反馈数据选项设置
-poco("com.thinkhome.v3:id/expand_listview").child("com.thinkhome.v3:id/detail_layout")[6].child("android.widget.RelativeLayout").child("com.thinkhome.v3:id/expand_img").click()
+# poco("com.thinkhome.v3:id/expand_listview").child("com.thinkhome.v3:id/detail_layout")[6].child("android.widget.RelativeLayout").child("com.thinkhome.v3:id/expand_img").click()
 for i in range(1,10):
-    if  poco(text="ThinkID:94299091").exists():
-        poco(text="ThinkID:94299091").long_click()
+    if  poco(text="ThinkID:82758873").exists():
+        poco(text="ThinkID:82758873").long_click()
         poco(text="更多设置").click()
         poco(text="指示灯方案").click()
         break
@@ -280,10 +281,10 @@ poco("com.thinkhome.v3:id/toolbar_right_text").click()
 # 反馈数据选项：恢复默认
 poco(text="反馈数据选项").click()
 poco("com.thinkhome.v3:id/btn_restore").click()
-poco(text="反馈数据选项").click()
+poco(text="保存").click()
 
 # 夜间显示：设置
-poco(text="反馈数据选项").click()
+poco(text="夜间显示").click()
 poco(text="昏暗不显示").click()
 poco("com.thinkhome.v3:id/toolbar_right_text").click()
 poco("com.thinkhome.v3:id/toolbar_btn_back").click()
@@ -296,22 +297,22 @@ poco("com.thinkhome.v3:id/expand_listview").child("com.thinkhome.v3:id/detail_la
 poco(text="ThinkID:94170840").long_click()
 poco(text="更多设置").click()
 poco(text="替换").click()
-poco("com.thinkhome.v3:id/edit_text_view").set_text("")
-poco("com.thinkhome.v3:id/toolbar_right_text").click()
-message = poco("com.thinkhome.v3:id/tv_name").get_text()
-try:
-    assert_equal(message,"内容不能为空","替换：为空")
-except:
-    print("Error")
-else:
-    print("Ok")
-finally:
-    poco("android:id/button3").click()
+# poco("com.thinkhome.v3:id/edit_text_view").set_text("")
+# poco("com.thinkhome.v3:id/toolbar_right_text").click()
+# message = poco("com.thinkhome.v3:id/tv_name").get_text()
+# try:
+#     assert_equal(message,"内容不能为空","替换：为空")
+# except:
+#     print("Error")
+# else:
+#     print("Ok")
+# finally:
+#     poco("android:id/button3").click()
     
 # 替换：控制器不存在
 poco("com.thinkhome.v3:id/edit_text_view").set_text("111")
 poco("com.thinkhome.v3:id/toolbar_right_text").click()
-message = poco("com.thinkhome.v3:id/tv_name").get_text()
+message = poco("com.thinkhome.v3:id/message").get_text()
 try:
     assert_equal(message,"控制器不存在","替换：控制器不存在")
 except:

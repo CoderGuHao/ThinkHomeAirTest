@@ -1,6 +1,7 @@
 # -*- encoding=utf8 -*-
 __author__ = "guhao"
 
+from airtest.
 from airtest.core.api import *
 from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 poco = AndroidUiautomationPoco()
@@ -385,7 +386,7 @@ poco("com.thinkhome.v3:id/et_password").set_text("098765")
 poco("com.thinkhome.v3:id/btn_login").click()
 message = poco("android:id/message").get_text()
 try:
-    assert_equal(message,"身份验证失败，请检查用户名和密码是否填写正确","账号或密码错误")
+    assert_equal(message,"身份验证失败，请检查用户名和密码是否填写正确","登录：账号或密码错误")
 except:
     print("error")
 else:
@@ -400,7 +401,7 @@ poco("com.thinkhome.v3:id/btn_login").click()
 sleep(5)
 message1 = poco("com.thinkhome.v3:id/house_list").child("android.widget.RelativeLayout")[0].child("android.widget.LinearLayout").child("com.thinkhome.v3:id/name").get_text()
 poco("com.thinkhome.v3:id/house_list").child("android.widget.RelativeLayout")[0].click()
-sleep(2)
+sleep(10)
 message2 = poco("com.thinkhome.v3:id/tv_currenthouse").get_text()
 try:
     assert_equal(message1,message2,"登录:成功登录")
@@ -414,7 +415,6 @@ poco(text="设置").click()
 poco(text="账号管理").click()
 poco("com.thinkhome.v3:id/logout").click()
 poco("android:id/button1").click()
-print(message)
 if poco("com.thinkhome.v3:id/tv_welcome").exists:
     message = "已退出登录"
 try:

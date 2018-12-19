@@ -1,4 +1,6 @@
 # -*- encoding=utf8 -*-
+# 建议关闭系统密码、欢迎页、动态背景
+# TAG = 1
 __author__ = "guhao"
 
 from airtest.core.api import *
@@ -53,6 +55,10 @@ def logout():
                 "com.thinkhome.v3:id/house_list").child("android.widget.RelativeLayout")[0].click()
             sleep(10)
         logout()
+        
+        
+def doInputPassword():
+    poco("com.thinkhome.v3:id/et_password").set_text("1234")
 
 
 # 初始化登录
@@ -331,7 +337,7 @@ finally:
 # 登录:成功登录
 try:
     login("18368493627", "123456")
-    sleep(5)
+    sleep(10)
     if poco("com.thinkhome.v3:id/house_list").exists():
         message1 = poco("com.thinkhome.v3:id/house_list").child("android.widget.RelativeLayout")[0].child("android.widget.LinearLayout").child("com.thinkhome.v3:id/name").get_text()
         poco("com.thinkhome.v3:id/house_list").child("android.widget.RelativeLayout")[0].click()

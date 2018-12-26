@@ -1,8 +1,6 @@
 # -*- encoding=utf8 -*-
 __author__ = "guhao"
 
-#执行该脚本前确保app权限均打开，关闭系统密码、欢迎页、动态背景下载、成员管理邀请等干扰,退出所有账号
-
 import random
 from airtest.core.api import *
 from poco.drivers.android.uiautomation import AndroidUiautomationPoco
@@ -12,27 +10,46 @@ auto_setup(__file__)
 
 # start_app("com.thinkhome.v3")
 # sleep(5)
-# 
-# poco("com.thinkhome.v3:id/et_account").set_text("18158288412")
-# poco("com.thinkhome.v3:id/et_password").set_text("0123456")
-# poco("com.thinkhome.v3:id/btn_login").click()
-# sleep(5)
 
+
+def doInputPassword():
+    poco("com.thinkhome.v3:id/et_password").set_text("1234")
+    
+    
+def go_device(device_type):
+    poco(text="类别").click()
+    poco(text=device_type).click()    
+    
+    
+def go_device_setting(name):
+    for i in range(1, 10):
+        if poco(text=name).exists():
+            poco(text=name).long_click()
+            poco(text="更多设置").click()
+            break
+        else:
+            poco.scroll(direction='vertical', percent=0.3, duration=1.0)
+            sleep(2)    
+            
+            
+def change_subtype(name):
+    
+    
+    
 #修改类型
-poco(text="类别").click()
-poco(text="灯光").click()
-num1 = random.randint(0,1)
-poco("com.thinkhome.v3:id/scroll").child("android.widget.RelativeLayout")[num1].child("com.thinkhome.v3:id/img_icon").long_click()
-poco(text="修改图标").click()
-num2 = random.randint(0,7)
-poco("com.thinkhome.v3:id/listView").child("android.widget.RelativeLayout")[num2].child("com.thinkhome.v3:id/img_icon_custom").click()
-poco("com.thinkhome.v3:id/toolbar_right_text").click()
-poco("com.thinkhome.v3:id/scroll").child("android.widget.RelativeLayout")[num1].child("com.thinkhome.v3:id/img_icon").long_click()
-poco(text="修改图标").click()
-if poco("com.thinkhome.v3:id/listView").child("android.widget.RelativeLayout")[num2].child("com.thinkhome.v3:id/img_icon_custom").poco(checked="True").exists:
-    message = "当前类型为修改类型"
 try:
-    assert_equal(message,"当前类型为修改类型","修改类型")
+    go_device("灯光")
+    go_device_setting("自动化测试")
+    poco("com.thinkhome.v3:id/img_icon_custom").click()
+    num2 = random.randint(0,7)
+    poco("com.thinkhome.v3:id/listView").child("android.widget.RelativeLayout")[num2].child("com.thinkhome.v3:id/img_icon_custom").click()
+    poco("com.thinkhome.v3:id/toolbar_right_text").click()
+    poco("com.thinkhome.v3:id/scroll").child("android.widget.RelativeLayout")[num1].child("com.thinkhome.v3:id/img_icon").long_click()
+    poco(text="修改图标").click()
+    result = False
+    if poco("com.thinkhome.v3:id/listView").child("android.widget.RelativeLayout")[num2].child("com.thinkhome.v3:id/img_icon_custom").poco(checked="True").exists:
+        result = True
+        assert_equal(result,True,"修改类型")
 except:
     print("error")
 else:

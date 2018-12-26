@@ -262,6 +262,9 @@ finally:
     change_account("18158288412", "4008002016")
     sleep(5)
     change_house("0正式")
+    sleep(10)
+    if poco("com.thinkhome.v3:id/et_password").exists():
+        doInputPassword()
 
 '''
 # 账号切换：添加账号、切换账号

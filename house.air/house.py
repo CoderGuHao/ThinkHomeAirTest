@@ -1,4 +1,5 @@
 # -*- encoding=utf8 -*-
+# TAG = 6
 __author__ = "lu201"
 
 from airtest.core.api import *
@@ -8,9 +9,8 @@ auto_setup(__file__)
 from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 poco = AndroidUiautomationPoco()
 
-#start app
-start_app('com.thinkhome.v3')
-sleep(5)
+# start_app('com.thinkhome.v3')
+# sleep(5)
 
 def accessToHouseSetting():
     poco("android:id/tabs").child("android.widget.RelativeLayout")[3].child("com.thinkhome.v3:id/tab_image").click()
@@ -22,6 +22,7 @@ def editHouseName(name):
     
 def changeAccount(account,pwd):
     poco("android:id/tabs").child("android.widget.RelativeLayout")[3].child("com.thinkhome.v3:id/tab_image").click()
+    poco.scroll(direction='vertical', percent=0.3, duration=1.0)
     poco(text="账号管理").click()
     poco("com.thinkhome.v3:id/toolbar_right_text").click()
     poco("com.thinkhome.v3:id/toolbar_btn_setting").click()
@@ -457,9 +458,10 @@ try:
     poco("com.thinkhome.v3:id/delete").click()
     poco("android:id/button1").click()
     sleep(3)
+    resultScenario = True
     for i in range(1,10):
         if  poco(text="自动化测试房屋").exists():
-            resultScenario = poco(text="自动化测试房屋").exists()
+            resultScenario = False
             break
         else:
             poco.scroll(direction='vertical',percent=0.3,duration=1.0)

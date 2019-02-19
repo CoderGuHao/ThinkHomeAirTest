@@ -19,15 +19,16 @@ def login():
     poco("com.thinkhome.v3:id/et_account").click()
     poco("com.thinkhome.v3:id/et_account").set_text("18158288412")
     poco("com.thinkhome.v3:id/et_password").click()
-    poco("com.thinkhome.v3:id/et_password").set_text("0123456")
+    poco("com.thinkhome.v3:id/et_password").set_text("4008002016")
     poco("com.thinkhome.v3:id/btn_login").click()
     poco(text="0正式").click()
-    sleep(5)
+    sleep(10)
 
 
 def changeAccount():
     poco("android:id/tabs").child("android.widget.RelativeLayout")[
         3].child("com.thinkhome.v3:id/tab_image").click()
+    poco.scroll(direction='vertical', percent=0.3, duration=1.0)
     poco(text="账号管理").click()
     poco(text="切换账号").click()
     poco("com.thinkhome.v3:id/toolbar_btn_setting").click()
@@ -83,7 +84,7 @@ try:
     sleep(2)
     poco(text="设为开启首页").click()
     changeAccount()
-    sleep(3)
+    sleep(5)
     login()
     snapshot(msg="首页：设为开启首页功能 验证.")
 except BaseException:
@@ -98,7 +99,7 @@ try:
     changeAccount()
     sleep(3)
     login()
-    sleep(2)
+    sleep(5)
     resultScenario = poco("android:id/tabs").child("android.widget.RelativeLayout")[
         1].child("com.thinkhome.v3:id/tab_text").get_text()
     assert_equal(resultScenario, "房间", "房间头部：开启首页设置 验证")
@@ -116,7 +117,7 @@ try:
     changeAccount()
     sleep(3)
     login()
-    sleep(2)
+    sleep(5)
     resultScenario = poco("com.thinkhome.v3:id/title_text").get_text()
     assert_equal(resultScenario, "一层网页版App勿删", "房间设备tab设为开启首页 验证")
 except BaseException:
@@ -135,12 +136,12 @@ try:
     changeAccount()
     sleep(3)
     login()
-    sleep(2)
+    sleep(5)
     resultScenario = poco("com.thinkhome.v3:id/title_text").get_text()
     assert_equal(resultScenario, "一层", "通用：开启首页 验证")
 except BaseException:
     print("Error:通用开启首页设置")
-else:
+finally:
     poco("com.thinkhome.v3:id/toolbar_btn_back").click()
     poco("android:id/tabs").child("android.widget.RelativeLayout")[
         3].child("com.thinkhome.v3:id/tab_image").click()
@@ -149,7 +150,6 @@ else:
     sleep(2)
     poco(text="全部设备列表").click()
     poco("com.thinkhome.v3:id/toolbar_right_text").click()
-finally:
     poco("com.thinkhome.v3:id/toolbar_btn_back").click()
 
 # 设备自动更新停启用
@@ -199,7 +199,7 @@ try:
     poco("android:id/button3").click()
 except BaseException:
     print("Error:设备自动更新错误时间设置")
-else:
+finally:
     # 改回原值
     sleep(2)
     poco(text="开始时间").click()
@@ -382,6 +382,7 @@ try:
 except BaseException:
     print("Error:改回原系统密码")
 
+    '''
 # 系统密码：开启APP 设置
 try:
     poco("android:id/tabs").child("android.widget.RelativeLayout")[
@@ -401,7 +402,7 @@ try:
     snapshot(msg="设置后")
 except BaseException:
     print("Error:系统密码开启APP 设置")
-else:
+finally:
     poco("com.thinkhome.v3:id/pwd_app").child("android.widget.RelativeLayout").child(
         "com.thinkhome.v3:id/switch_view").click()
     poco("com.thinkhome.v3:id/pwd_system").child(
@@ -451,6 +452,7 @@ except BaseException:
 else:
     # 退出忘记密码界面
     poco("com.thinkhome.v3:id/toolbar_btn_back").click()
+    '''
 
 # 普通背景：从图库选择
 try:

@@ -32,29 +32,42 @@ def go_device_setting(name):
             sleep(2)    
             
             
-def change_subtype(name):
+def change_subtype(subtype):
+    if poco(text="设备设置").exists():
+        poco("com.thinkhome.v3:id/img_icon_custom").click()
+    poco(text=subtype).click()
+    poco("com.thinkhome.v3:id/toolbar_right_text").click()
+    if poco("com.thinkhome.v3:id/et_password").exists():
+        doInputPassword()
     
     
+def edit_name(name):
+    if poco(text="设备设置").exists():
+        poco("com.thinkhome.v3:id/img_icon_custom").click()
+        poco("com.thinkhome.v3:id/toolbar_right_text").click()
+    poco("com.thinkhome.v3:id/tv_name").set_text(name)
+    poco("com.thinkhome.v3:id/toolbar_right_text").click()
+    if poco("com.thinkhome.v3:id/et_password").exists():
+        doInputPassword()
+
+
     
 #修改类型
 try:
     go_device("灯光")
     go_device_setting("自动化测试")
+    change_subtype("射灯")
     poco("com.thinkhome.v3:id/img_icon_custom").click()
-    num2 = random.randint(0,7)
-    poco("com.thinkhome.v3:id/listView").child("android.widget.RelativeLayout")[num2].child("com.thinkhome.v3:id/img_icon_custom").click()
-    poco("com.thinkhome.v3:id/toolbar_right_text").click()
-    poco("com.thinkhome.v3:id/scroll").child("android.widget.RelativeLayout")[num1].child("com.thinkhome.v3:id/img_icon").long_click()
-    poco(text="修改图标").click()
     result = False
-    if poco("com.thinkhome.v3:id/listView").child("android.widget.RelativeLayout")[num2].child("com.thinkhome.v3:id/img_icon_custom").poco(checked="True").exists:
+    if poco("com.thinkhome.v3:id/listView").child("android.widget.RelativeLayout")[1].child("com.thinkhome.v3:id/tv_device_checked").get_checked() == True:
         result = True
         assert_equal(result,True,"修改类型")
 except:
-    print("error")
-else:
-    print("ok")
+    print("Error:修改类型")
+finally:
+    change_subtype("灯光")
 
+'''
 #修改图标：拍照
 poco("com.thinkhome.v3:id/toolbar_right_text").click()
 poco("com.thinkhome.v3:id/img_photo").click()
@@ -81,102 +94,83 @@ poco(text="修改图标").click()
 poco("com.thinkhome.v3:id/toolbar_right_text").click()
 poco("com.thinkhome.v3:id/img_icon").click()
 poco("com.thinkhome.v3:id/toolbar_right_text").click()
+'''
 
 #修改名称：为空
-poco("com.thinkhome.v3:id/scroll").child("android.widget.RelativeLayout")[num1].child("com.thinkhome.v3:id/img_icon").long_click()
-poco(text="修改图标").click()
-poco("com.thinkhome.v3:id/toolbar_right_text").click()
-poco("com.thinkhome.v3:id/tv_name").set_text("")
-poco("com.thinkhome.v3:id/toolbar_right_text").click()
-message = poco("android:id/message").get_text()
 try:
+    edit_name("")
+    message = poco("android:id/message").get_text()
     assert_equal(message,"名称不能为空","修改名称：为空")
 except:
-    print("error")
-else:
-    print("ok")
+    print("Error:修改名称为空")
 finally:
     poco("android:id/button3").click()
     
 #修改名称：包含特殊字符<
-poco("com.thinkhome.v3:id/tv_name").set_text("<")
-poco("com.thinkhome.v3:id/toolbar_right_text").click()
-message = poco("android:id/message").get_text()
 try:
+    edit_name("<")
+    message = poco("android:id/message").get_text()
     assert_equal(message,"数据包含特殊字符","修改名称：包含特殊字符<")
 except:
-    print("error")
-else:
-    print("ok")
+    print("Error:修改名称包含特殊字符<")
 finally:
     poco("android:id/button3").click()
     
 #修改名称：包含特殊字符>
-poco("com.thinkhome.v3:id/tv_name").set_text(">")
-poco("com.thinkhome.v3:id/toolbar_right_text").click()
-message = poco("android:id/message").get_text()
 try:
+    edit_name(">")
+    message = poco("android:id/message").get_text()
     assert_equal(message,"数据包含特殊字符","修改名称：包含特殊字符>")
 except:
-    print("error")
-else:
-    print("ok")
+    print("Error:修改名称包含特殊字符>")
 finally:
     poco("android:id/button3").click()
 
-# #修改名称：包含特殊字符＇
-# poco("com.thinkhome.v3:id/tv_name").set_text("＇")
-# poco("com.thinkhome.v3:id/toolbar_right_text").click()
-# message = poco("android:id/message").get_text()
-# try:
-#     assert_equal(message,"数据包含特殊字符","修改名称：包含特殊字符＇")
-# except:
-#     print("error")
-# else:
-#     print("ok")
-# finally:
-#     poco("android:id/button3").click()
+    '''
+#修改名称：包含特殊字符＇
+try:
+    edit_name("＇")
+    message = poco("android:id/message").get_text()
+    assert_equal(message,"数据包含特殊字符","修改名称：包含特殊字符＇")
+except:
+    print("Error:修改名称包含特殊字符＇")
+finally:
+    poco("android:id/button3").click()
+    '''
     
 #修改名称：包含特殊字符\
-poco("com.thinkhome.v3:id/tv_name").set_text("\\")
-poco("com.thinkhome.v3:id/toolbar_right_text").click()
-message = poco("android:id/message").get_text()
 try:
+    edit_name("\\")
+    message = poco("android:id/message").get_text()
     assert_equal(message,"数据包含特殊字符","修改名称：包含特殊字符\\")
 except:
-    print("error")
-else:
-    print("ok")
+    print("Error:修改名称包含特殊字符\\")
 finally:
     poco("android:id/button3").click()
     
 #修改名称：包含特殊字符&
-poco("com.thinkhome.v3:id/tv_name").set_text("&")
-poco("com.thinkhome.v3:id/toolbar_right_text").click()
-message = poco("android:id/message").get_text()
 try:
+    edit_name("&")
+    message = poco("android:id/message").get_text()
     assert_equal(message,"数据包含特殊字符","修改名称：包含特殊字符&")
 except:
-    print("error")
-else:
-    print("ok")
+    print("Error:修改名称包含特殊字符&")
 finally:
     poco("android:id/button3").click()
                  
 #修改名称：正确修改
-poco("com.thinkhome.v3:id/tv_name").set_text("测试")
-poco("com.thinkhome.v3:id/toolbar_right_text").click()
-message=poco("com.thinkhome.v3:id/scroll").child("android.widget.RelativeLayout")[num1].child("com.thinkhome.v3:id/name_layout").child("com.thinkhome.v3:id/tv_device").get_text()
 try:
+    edit_name("测试")
+    message=poco("com.thinkhome.v3:id/scroll").child("android.widget.RelativeLayout")[num1].child("com.thinkhome.v3:id/name_layout").child("com.thinkhome.v3:id/tv_device").get_text()
     assert_equal(message,"测试","修改名称：正确修改")
 except:
-    print("error")
-else:
-    print("ok")
+    print("Error:修改名称正确修改")
+
 
 #设置房间
-poco("com.thinkhome.v3:id/scroll").child("android.widget.RelativeLayout")[num1].child("com.thinkhome.v3:id/img_icon").long_click()
-poco(text="更多设置").click()
+num1 = 1
+# poco("com.thinkhome.v3:id/scroll").child("android.widget.RelativeLayout")[num1].child("com.thinkhome.v3:id/img_icon").long_click()
+# poco(text="更多设置").click()
 poco(text="房间").click()
 num3 = random.randint(0,7)
 poco("com.thinkhome.v3:id/list_view").child("android.widget.RelativeLayout")[num3].child("com.thinkhome.v3:id/checked_text_view").click()
